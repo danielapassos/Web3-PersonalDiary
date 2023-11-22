@@ -1,15 +1,18 @@
-import { WagmiConfig, createConfig, mainnet } from 'wagmi';
-import { createPublicClient, http } from 'viem';
+import { WagmiConfig, createConfig, configureChains, mainnet } from 'wagmi';
+import { publicProvider } from 'wagmi/providers/public';
 import { LensContextProvider } from './lensContext';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [mainnet],
+  [publicProvider()]
+);
+
 const config = createConfig({
   autoConnect: true,
-  publicClient: createPublicClient({
-    chain: mainnet,
-    transport: http()
-  }),
+  publicClient,
+  webSocketPublicClient,
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
