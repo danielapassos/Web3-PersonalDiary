@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={config}>
       <LensContextProvider>
+        {/* Ensure all components using wagmi hooks are descendants of WagmiConfig */}
         <Component {...pageProps} />
       </LensContextProvider>
     </WagmiConfig>

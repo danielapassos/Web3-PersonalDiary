@@ -7,9 +7,8 @@ const WalletConnect = () => {
   const { connector: activeConnector, isConnected } = useAccount();
 
   return (
-    <>
+    <div>
       {isConnected && activeConnector && <div>Connected to {activeConnector.name}</div>}
-
       {connectors.map((connector) => (
         <button
           disabled={!connector.ready}
@@ -20,9 +19,8 @@ const WalletConnect = () => {
           {isLoading && pendingConnector?.id === connector.id && ' (connecting)'}
         </button>
       ))}
-
       {error && <div>{error.message}</div>}
-    </>
+    </div>
   );
 };
 
